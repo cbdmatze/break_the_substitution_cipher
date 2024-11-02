@@ -1,6 +1,4 @@
-Best Hyperparameters: {'bigram_weight': 3, 'trigram_weight': 5, 'initial_temp': 1000, 'cooling_rate': 0.99, 'iterations': 500}
-
-Decrypted Text:
+Best Decrypted Text:
 Drxweiwakitw;
 
 ur, kfi Vucirw Qruvikfioa
@@ -7709,3 +7707,9 @@ twhnoctwz fum ku vxei cuwxktuwa ku kfi Qrusihk Zokiwbirz Ntkirxrj
 Xrhftli Duowcxktuw, fum ku finq qrucohi uor wim iBuuea, xwc fum ku
 aobahrtbi ku uor ivxtn wimanikkir ku fixr xbuok wim iBuuea.
 
+
+
+Best Hyperparameters:
+initial_temp: 500
+cooling_rate: 0.98
+iterations: 500
