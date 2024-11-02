@@ -16,6 +16,7 @@ def load_encrypted_book(filename):
     with open(filename, "r") as file:
         return file.read()
 
+
 # Substitute text using a given substitution dictionary
 def substitute_text(text, substitution_dict):
     """
@@ -30,6 +31,7 @@ def substitute_text(text, substitution_dict):
     """
     table = str.maketrans(substitution_dict)
     return text.translate(table)
+
 
 # Evaluate the current decryption based on n-grams
 def evaluate_decryption(decrypted_text, digraph_weight=2, trigram_weight=3, quadgram_weight=4, pentagram_weight=5, penalty_weight=1):
@@ -77,6 +79,7 @@ def evaluate_decryption(decrypted_text, digraph_weight=2, trigram_weight=3, quad
         score -= decrypted_text.count(seq) * penalty_weight
     
     return score
+
 
 # Simulated Annealing with higher n-grams
 def simulated_annealing_with_ngrams(encrypted_text, initial_mapping, digraph_weight=2, trigram_weight=3, quadgram_weight=4, pentagram_weight=5, temperature=1000, cooling_rate=0.995, max_iterations=1000):
@@ -136,6 +139,7 @@ def simulated_annealing_with_ngrams(encrypted_text, initial_mapping, digraph_wei
             break
         
     return best_decrypted_text, best_score
+
 
 # Initialize random substitution mapping
 def initialize_random_mapping():
@@ -211,6 +215,7 @@ def grid_search(encrypted_text, filename, digraph_weights, trigram_weights, quad
         result_file.write(f"\n\nBest Hyperparameters:\nDigraph Weight={best_combination[0]}, Trigram Weight={best_combination[1]}, Quadgram Weight={best_combination[2]}, Pentagram Weight={best_combination[3]}, Temp={best_combination[4]}, Cooling Rate={best_combination[5]}")
     
     return best_decrypted_text
+
 
 # Main function to run grid search and break the cipher
 def break_cipher_with_grid_search(filename):
