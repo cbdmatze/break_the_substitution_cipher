@@ -1,0 +1,60 @@
+
+hill_climbing_with_simulated_annealing.py
+
+ and\nL Las Lahhied oft oL tre hooL in sthonL LonLfLsions.\n\nL LeLeh sfLLeeded to tris. 
+ L LaL Loh tLo Lontrs on tre Voint oL deatr; LL\nhaLinLs, as L aLtehLahds reahd, Lehe LhiLrtLfL; 
+ L LaLLed LLseLL tre\nLfhdeheh oL LiLLiaL, oL Qfstine, and oL LLehLaL. 
+ QoLetiLes L entheated LL\nattendants to assist Le in tre desthfLtion oL tre Liend LL LroL L Las\ntohLented; 
+ and at otrehs L LeLt tre LinLehs oL tre Lonsteh aLheadL LhasVinL\nLL neLL, and sLheaLed aLofd Litr aLonL and tehhoh. 
+
+
+
+
+
+break_substitution_trigram_simulated_annealing.py
+
+ end\nI qen merried oot of tte roof in ntrong monkosnionn.\n\nA feker nommeeded to ttin. 
+ I sej for tqo fonttn on tte boint of deett; fj\nrekingn, en I efterqerdn teerd, qere frigttfos; 
+ I messed fjnesf tte\nforderer of Gissief, of Xontine, end of Mserkes. 
+ Sofetifen I entreeted fj\nettendentn to ennint fe in tte dentromtion of tte fiend yj qtof I qen\ntorfented; 
+ end et ottern I fest tte fingern of tte fonnter esreedj grenbing\nfj nemv, end nmreefed esood qitt egonj end terror. 
+
+
+
+
+
+break_substitution_trigram_adjust_weight_digraph_trigram.py
+
+ond\nI lon torried oft of tee rooc in ntrong tonkfsnionn.\n\nA feker nftteeded to tein. 
+I soy for tlo conten on tee boint of deote; cy\nrokingn, on I ofterlordn eeord, lere frigetffs; 
+I tossed cynesf tee\ncfrderer of Gissioc, of Xfntine, ond of Mserkos.
+Soceticen I entreoted cy\nottendontn to onnint ce in tee dentrfttion of tee fiend zy leoc I lon\ntorcented; 
+ond ot oteern I fest tee fingern of tee connter osreody gronbing\ncy netj, ond ntreoced osofd lite ogony ond terror. 
+
+
+
+
+
+break_substitution_penalty_grid_search_bi-trigram-weight.py
+
+ and\nZ cas barried ozt of the room in strong bonvzusions.\n\nW fever szbbeeded to this. 
+ Z uaw for tco months on the point of death; mw\nravings, as Z aftercards heard, cere frightfzu; 
+ Z bauued mwseuf the\nmzrderer of Riuuiam, of Tzstine, and of Vuervau. Pometimes Z entreated mw\nattendants 
+ to assist me in the destrzbtion of the fiend jw chom Z cas\ntormented; and at others Z feut the fingers 
+ of the monster aureadw grasping\nmw nebk, and sbreamed auozd cith agonw and terror. 
+
+
+
+
+
+break_substitution_simulated_annealing_higher_ngrams_integrated.py
+
+ear morning, in the batter daws of Xecemjer, that F first sav\nthe vhite cbiffs of Britain. She janls of the Shames yresented a nev scene;
+\nthew vere fbat jzt fertibe, and abmost eperw tovn vas marled jw the\nrememjrance of some storw. He sav Sibjzrw Jort and rememjered the Oyanish\nUrmada, 
+Krapesend, Hoobvich, and Kreenvich—ybaces vhich F had heard\nof epen in mw cozntrw.\n\nUt bength ve sav the nzmerozs steeybes of Pondon, 
+Ot. Razb’s tovering\najope abb, and the Sover famed in Wngbish historw.\n\n\n\n\nMhayter 19\n\n\nPondon vas ozr yresent yoint of rest; 
+ve determined to remain seperab\nmonths in this vonderfzb and cebejrated citw. Mberpab desired the\nintercozrse of the men of genizs 
+and tabent vho fbozrished at this\ntime, 
+
+
+
