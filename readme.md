@@ -1,3 +1,4 @@
+---
 The folder "previous_attempts"  contains all approaches that were necessary to come to such a project in the end....you can get an impression of my way to approach to that code problem and all the attempts were saved because in other code issues similar to this one breaking a classic substitution cipher they could provide sexy results...I have to warn you in advance....this program takes several hours to evaluate the best hyperparameters....but to be honest....that is not my problem...but yours....!! Have a lot of fun....and please don't be to hard to me when it comes to grading that shit...!!!
 
 
@@ -14,6 +15,7 @@ The key components of the project include:
 	2.	Decrypting the text using a random substitution mapping.
 	3.	Evaluating the quality of the decryption using n-gram analysis.
 	4.	Optimizing the decryption through simulated annealing, a probabilistic method for finding an approximate solution.
+
 	5.	Performing a grid search to explore different sets of hyperparameters to maximize decryption accuracy.
 
 How the Code Works
@@ -70,11 +72,17 @@ After finding the best mapping and hyperparameters, the program outputs:
 
 The final result is printed to the console, and the decrypted text (along with the best hyperparameters) is saved to a file named decryption_results_simulated_annealing_higher_ngrams_integrated.txt.
 
+
+
+
 Key Concepts Behind the Code
+
 
 1. Substitution Cipher
 
 A substitution cipher is a type of encryption where each letter of the plaintext is replaced with a corresponding letter in the ciphertext. The challenge in solving a substitution cipher is to recover the original mapping, i.e., which letter in the ciphertext corresponds to which letter in the plaintext.
+
+
 
 2. Simulated Annealing
 
@@ -84,9 +92,13 @@ Simulated annealing is inspired by the process of heating and cooling materials 
 	•	Gradually improving it by exploring neighboring mappings.
 	•	Accepting worse mappings with decreasing probability to escape local optima.
 
+
+
 3. N-Gram Analysis
 
 In natural language, certain combinations of letters are more likely to occur than others. For example, in English, “th” is much more common than “zx”. N-gram analysis uses these patterns to assess the likelihood that a given decryption is correct. The more common n-grams a decrypted text has, the more likely it is to be close to the original plaintext.
+
+
 
 4. Grid Search
 
@@ -107,6 +119,8 @@ When attempting to decrypt a substitution cipher, several key considerations mus
 	4.	Hyperparameter Tuning:
 	•	The success of simulated annealing heavily depends on the choice of hyperparameters (e.g., initial temperature, cooling rate). Grid search is used to systematically explore different hyperparameter combinations and find the optimal configuration.
 
+
+
 Running the Code
 
 To run the program, simply call the break_cipher_with_grid_search function with the filename of the encrypted text as an argument:
@@ -115,7 +129,10 @@ break_cipher_with_grid_search("encrypted_book.txt")
 
 Make sure that the encrypted text file (encrypted_book.txt) is in the same directory as the script.
 
+
+
 Conclusion
 
 This project provides a robust method for decrypting substitution ciphers by leveraging the power of n-gram analysis and simulated annealing. It explores various hyperparameter configurations through grid search to find the best decryption possible. The combination of statistical analysis and probabilistic optimization offers an effective approach to breaking classical ciphers.
 
+---
