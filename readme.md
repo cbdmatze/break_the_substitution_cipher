@@ -1,138 +1,121 @@
----
-The folder "previous_attempts"  contains all approaches that were necessary to come to such a project in the end....you can get an impression of my way to approach to that code problem and all the attempts were saved because in other code issues similar to this one breaking a classic substitution cipher they could provide sexy results...I have to warn you in advance....this program takes several hours to evaluate the best hyperparameters....but to be honest....that is not my problem...but yours....!! Have a lot of fun....and please don't be to hard to me when it comes to grading that shit...!!!
+# Break the Substitution Cipher
 
+An experimental Python project for attacking a monoalphabetic substitution cipher. It began with straightforward letter-frequency guesses and grew into a collection of hill-climbing, simulated-annealing, n-gram-scoring, and hyperparameter-search experiments.
 
+> **In short:** the current higher-n-gram experiment can produce readable passages, but it does not reliably recover every letter in the book. Its search is stochastic, its score is a lightweight heuristic, and the full parameter sweep can take a long time.
 
-Cipher Breaker using Simulated Annealing and N-Gram Analysis
+## What is in this repository?
 
-Overview
+| File or folder | Purpose |
+| --- | --- |
+| [`encrypted_book.txt`](encrypted_book.txt) | Ciphertext used by the experiments. |
+| [`break_substitution_simulated_annealing_higher_ngrams_integrated.py`](break_substitution_simulated_annealing_higher_ngrams_integrated.py) | The current higher-n-gram simulated-annealing and grid-search experiment. |
+| [`final_attempt_best_results.py`](final_attempt_best_results.py) | Another saved, runnable experiment from the development process. |
+| [`results.txt`](results.txt) | Sample output excerpts from several attempts; useful for comparing their characteristic errors. |
+| [`previous_attempts/`](previous_attempts/) | The broader experiment archive, including unsuccessful approaches and their output. |
+| [`previous_worthy_steps/`](previous_worthy_steps/) | Approaches and intermediate versions worth keeping for future cipher-solving work. |
 
-This project demonstrates how to decrypt a substitution cipher using a grid search of hyperparameters and simulated annealing to optimize the solution. The program attempts to recover plaintext from encrypted text where the substitution cipher is unknown. It uses statistical analysis of n-grams (common letter combinations in the English language) to evaluate potential solutions.
+The archives are part of the project, not clutter to discard: even a failed run can be a useful starting point for a different ciphertext or scoring model.
 
-The key components of the project include:
+## How the approach developed
 
-	1.	Loading the encrypted text.
-	2.	Decrypting the text using a random substitution mapping.
-	3.	Evaluating the quality of the decryption using n-gram analysis.
-	4.	Optimizing the decryption through simulated annealing, a probabilistic method for finding an approximate solution.
+The saved scripts and repository history show a gradual move from simple statistical guesses toward a more expensive search:
 
-	5.	Performing a grid search to explore different sets of hyperparameters to maximize decryption accuracy.
+1. **Start with letter frequencies.** The first versions compare ciphertext letter frequencies with typical English frequencies and build an initial substitution guess. This is fast, but individual-letter statistics do not capture word context; several letters can have similar frequencies, leaving ambiguous or incorrect mappings.
+2. **Refine mappings with hill climbing.** Later attempts swap letters in the guessed mapping and keep changes that improve a text score. This gives the search a way to improve beyond a one-shot frequency guess, but it can get stuck in a local optimum.
+3. **Add simulated annealing.** The search was extended to sometimes accept a worse-scoring swap, with the chance controlled by a temperature that cools over time. Early exploration can escape some local optima; later iterations become more selective.
+4. **Use letter sequences, not just individual letters.** Scoring evolved from digraphs (2-letter sequences) to trigrams, then quadgrams and pentagrams. Experiments also adjusted the relative weights and tried penalties for unlikely sequences.
+5. **Combine methods and tune parameters.** The archive includes combined hill-climbing/simulated-annealing approaches and grid searches over n-gram weights, starting temperature, and cooling rate. The search became more systematic, but also much more computationally expensive.
+6. **Keep the trail.** Both [`previous_attempts/`](previous_attempts/) and [`previous_worthy_steps/`](previous_worthy_steps/) preserve the intermediate scripts. The [`results.txt`](results.txt) excerpts illustrate the progression: some outputs contain recognizable English while still making widespread substitution errors.
 
-How the Code Works
+This is an experimental path rather than a claim that every added technique improved every result. In particular, a higher score under one of these heuristic functions does not necessarily mean a more accurate decryption.
 
-1. Loading the Encrypted Text
+<details>
+<summary>Browse the preserved attempts and worthy steps</summary>
 
-The load_encrypted_book function reads the encrypted text from a file. This text is assumed to be encrypted using an unknown substitution cipher, where each letter in the alphabet has been replaced with another letter.
+The attempt archive contains:
 
-2. Substitution Cipher and Text Substitution
+- [`break_substitution_first_attempt.py`](previous_attempts/break_substitution_first_attempt.py)
+- [`break_substitution_second_attempt.py`](previous_attempts/break_substitution_second_attempt.py)
+- [`new_start.py`](previous_attempts/new_start.py) and [`new_start_2.py`](previous_attempts/new_start_2.py)
+- [`hill_climbing_algorithm.py`](previous_attempts/hill_climbing_algorithm.py)
+- [`hill_climbing_with_simulated_annealing.py`](previous_attempts/hill_climbing_with_simulated_annealing.py)
+- [`break_substitution_trigram_simulated_annealing.py`](previous_attempts/break_substitution_trigram_simulated_annealing.py)
+- [`break_substitution_trigram_adjust_weight_digraph_trigram.py`](previous_attempts/break_substitution_trigram_adjust_weight_digraph_trigram.py)
+- [`break_substitution_penalty_grid_search_bi-trigram-weight.py`](previous_attempts/break_substitution_penalty_grid_search_bi-trigram-weight.py)
+- [`break_substitution_grid_search_all_hyperparameters_bigraphs_trigrams_hill_climbing_simulated_annealing_combined.py`](previous_attempts/break_substitution_grid_search_all_hyperparameters_bigraphs_trigrams_hill_climbing_simulated_annealing_combined.py)
+- [`brek_substitution_digraph_trigram_hill_climbing_simulated_annealing_grid_search.py`](previous_attempts/brek_substitution_digraph_trigram_hill_climbing_simulated_annealing_grid_search.py)
+- [`break_substitution_simulated_annealing_higher_ngrams_integrated.py`](previous_attempts/break_substitution_simulated_annealing_higher_ngrams_integrated.py)
+- [`break_substitution_finally.py`](previous_attempts/break_substitution_finally.py) and [`break_substitution_finally_2.py`](previous_attempts/break_substitution_finally_2.py)
+- [`break_substitutionthi.py`](previous_attempts/break_substitutionthi.py)
+- [`results.txt`](previous_attempts/results.txt) and [`decrypted_results.txt`](previous_attempts/decrypted_results.txt)
 
-In a substitution cipher, each letter of the alphabet is mapped to a different letter. For example, all instances of ‘A’ in the plaintext might be replaced with ‘X’ in the ciphertext. The function substitute_text performs this substitution on the encrypted text given a dictionary that maps letters from the ciphertext to guessed plaintext letters.
+The separate worthy-steps archive keeps:
 
-3. N-Gram Analysis for Evaluation
+- [`break_substitution_first_attempt.py`](previous_worthy_steps/break_substitution_first_attempt.py), [`break_substitution_second_attempt.py`](previous_worthy_steps/break_substitution_second_attempt.py), and [`break_substitution_finally_2.py`](previous_worthy_steps/break_substitution_finally_2.py)
+- [`new_start.py`](previous_worthy_steps/new_start.py) and [`new_start_2.py`](previous_worthy_steps/new_start_2.py)
+- [`hill_climbing_algorithm.py`](previous_worthy_steps/hill_climbing_algorithm.py) and [`hill_climbing_with_simulated_annealing.py`](previous_worthy_steps/hill_climbing_with_simulated_annealing.py)
+- [`break_substitution_trigram_simulated_annealing.py`](previous_worthy_steps/break_substitution_trigram_simulated_annealing.py)
+- [`break_substitution_trigram_adjust_weight_digraph_trigram.py`](previous_worthy_steps/break_substitution_trigram_adjust_weight_digraph_trigram.py)
+- [`break_substitution_penalty_grid_search_bi-trigram-weight.py`](previous_worthy_steps/break_substitution_penalty_grid_search_bi-trigram-weight.py)
+- [`break_substitution_grid_search_all_hyperparameters_bigraphs_trigrams_hill_climbing_simulated_annealing_combined.py`](previous_worthy_steps/break_substitution_grid_search_all_hyperparameters_bigraphs_trigrams_hill_climbing_simulated_annealing_combined.py)
+- [`brek_substitution_digraph_trigram_hill_climbing_simulated_annealing_grid_search.py`](previous_worthy_steps/brek_substitution_digraph_trigram_hill_climbing_simulated_annealing_grid_search.py)
+- [`break_substitution_finally.py`](previous_worthy_steps/break_substitution_finally.py)
 
-The core evaluation method of this decryption is based on n-grams. An n-gram is a sequence of n characters that often appear together in a language. Common examples include:
+</details>
 
-	•	Digraphs (2-grams): like “th”, “he”, “in”.
-	•	Trigrams (3-grams): like “the”, “and”, “ing”.
-	•	Quadgrams (4-grams): like “tion”, “ment”.
-	•	Pentagrams (5-grams): like “ation”, “there”.
+## How the current experiment works
 
-The function evaluate_decryption uses a weighted sum of the number of n-grams that appear in the decrypted text, giving more weight to higher n-grams (such as quadgrams and pentagrams) because these are less frequent and more informative of the correctness of a decryption.
+The main script, [`break_substitution_simulated_annealing_higher_ngrams_integrated.py`](break_substitution_simulated_annealing_higher_ngrams_integrated.py), follows this loop:
 
-Penalties are also applied for unlikely sequences of letters, which helps eliminate mappings that produce nonsensical text.
+1. **Read the ciphertext** from `encrypted_book.txt`.
+2. **Create a random one-to-one letter mapping** for the alphabet. The same mapping is applied consistently throughout the text, preserving punctuation, spacing, and line breaks.
+3. **Score the candidate plaintext** by counting occurrences of small, hand-written English lists of digraphs, trigrams, quadgrams, and pentagrams, applying a configurable weight to each size, and subtracting a small penalty for a few unlikely pairs.
+4. **Try neighboring keys** by swapping two mapped letters. A better score is accepted; a worse one may also be accepted depending on the current simulated-annealing temperature.
+5. **Repeat with different settings.** The grid search tries 3 values for each of four n-gram weights, 3 starting temperatures, and 3 cooling rates: **729 parameter combinations**, each with up to 1,000 swap iterations (with an early stop when the temperature gets low).
+6. **Keep the best-scoring candidate** seen in the sweep, print its first 500 characters and chosen settings, and write up to the first 100,000 characters of the candidate plus the settings to `decryption_results_simulated_annealing_higher_ngrams_integrated.txt` in the current directory.
 
-4. Simulated Annealing for Optimization
+The search uses Python's random number generator without a fixed seed, so successive runs may produce different results.
 
-The heart of the decryption process lies in the use of simulated annealing, a probabilistic technique used to find an approximate solution to optimization problems. The steps are as follows:
+## Run it from the command line
 
-	•	Initialization: The process starts with a random substitution mapping of letters.
-	•	Neighboring Solution: At each iteration, a new potential solution is generated by swapping two letters in the current mapping.
-	•	Evaluation: The new solution is evaluated using n-gram analysis.
-	•	Acceptance Criteria: The new solution is accepted if it improves the score. Otherwise, it is accepted with a probability that decreases as the score difference becomes larger and as the temperature decreases. This acceptance of worse solutions allows the algorithm to escape local optima.
-	•	Cooling: The temperature gradually decreases over time, reducing the likelihood of accepting worse solutions. The process ends when the temperature drops below a set threshold or a maximum number of iterations is reached.
+The project uses only Python's standard library; there are no third-party packages to install. Clone the repository and move into its directory:
 
-The function simulated_annealing_with_ngrams implements this process.
+```bash
+git clone https://github.com/cbdmatze/break_the_substitution_cipher.git
+cd break_the_substitution_cipher
+```
 
-5. Grid Search over Hyperparameters
+Run the higher-n-gram experiment with Python 3:
 
-To maximize the accuracy of the decryption, various hyperparameters such as weights for n-grams, temperature, and cooling rates are tested. This is done using a grid search in the grid_search function, which systematically explores combinations of the following hyperparameters:
+```bash
+python3 break_substitution_simulated_annealing_higher_ngrams_integrated.py
+```
 
-	•	n-gram weights: How much weight to give to each n-gram (digraph, trigram, quadgram, pentagram) in the evaluation.
-	•	Temperature: The starting temperature for simulated annealing.
-	•	Cooling rate: The rate at which the temperature decreases during the annealing process.
+The script expects `encrypted_book.txt` in the current working directory, so run it from the repository root as shown. It currently has no command-line options: the parameter ranges and iteration limit are defined in the script. The full 729-combination sweep can take **hours**, depending on the machine and input length. The result file is written in the directory from which the command is run and is overwritten by a later run.
 
-The best set of hyperparameters is chosen based on the score of the decrypted text.
+To try the other saved root-level experiment instead:
 
-6. Final Output
+```bash
+python3 final_attempt_best_results.py
+```
 
-After finding the best mapping and hyperparameters, the program outputs:
+That file is a separate experiment, not a command-line wrapper for the main script; inspect its settings and expected input before running it.
 
-	•	The best decrypted text.
-	•	The combination of hyperparameters that resulted in the best decryption.
+## Reading the results
 
-The final result is printed to the console, and the decrypted text (along with the best hyperparameters) is saved to a file named decryption_results_simulated_annealing_higher_ngrams_integrated.txt.
+- **The preview in the terminal** is only the first 500 characters of the best candidate found. The generated result file contains at most the first 100,000 characters, plus the selected n-gram weights, temperature, and cooling rate; it may not contain the whole book.
+- **A higher score** means that the candidate matched more of the scorer's listed sequences under the selected weights. It is a relative search score—not a probability, a percentage of letters recovered, or proof that the plaintext is correct.
+- **Judge the text in context.** Look for coherent words and sentences across multiple passages. A candidate can look plausible in a short excerpt while containing many wrong letters elsewhere.
+- **Expect run-to-run variation.** Random initial mappings and swaps mean that separate runs can settle on different candidates. Comparing several runs can be informative, but does not by itself establish correctness.
+- **Use the archives as comparisons, not ground truth.** The samples in `results.txt` are excerpts from prior attempts and show both partial progress and remaining errors.
 
+## Current limitation and next step
 
+The present scorer only uses a small, manually selected set of English n-grams, up to 5 letters long. That is a useful prototype, but it misses much of the information in real English and can favor a candidate that happens to contain the chosen patterns.
 
+To make the decryption substantially more reliable—especially across an entire book—the next major improvement would be to integrate a **much richer, corpus-derived n-gram language model**, including more higher-order n-grams (for example, quadgrams and longer sequences), with normalized log-probability scoring rather than just counting a short fixed list. That would give the search more linguistic evidence to distinguish plausible mappings. It would still be a heuristic search, so perfect recovery is not guaranteed; validation against known plaintext or other independent evidence would remain valuable.
 
-Key Concepts Behind the Code
+## A note on runtime
 
-
-1. Substitution Cipher
-
-A substitution cipher is a type of encryption where each letter of the plaintext is replaced with a corresponding letter in the ciphertext. The challenge in solving a substitution cipher is to recover the original mapping, i.e., which letter in the ciphertext corresponds to which letter in the plaintext.
-
-
-
-2. Simulated Annealing
-
-Simulated annealing is inspired by the process of heating and cooling materials to reach a low-energy, stable state. It is used here to find the most probable letter mapping by:
-
-	•	Starting from a random mapping.
-	•	Gradually improving it by exploring neighboring mappings.
-	•	Accepting worse mappings with decreasing probability to escape local optima.
-
-
-
-3. N-Gram Analysis
-
-In natural language, certain combinations of letters are more likely to occur than others. For example, in English, “th” is much more common than “zx”. N-gram analysis uses these patterns to assess the likelihood that a given decryption is correct. The more common n-grams a decrypted text has, the more likely it is to be close to the original plaintext.
-
-
-
-4. Grid Search
-
-Grid search is a brute-force method of hyperparameter tuning. It tries all combinations of the hyperparameters within the specified ranges and selects the one that produces the best result. In this case, it searches for the best combination of n-gram weights, temperature, and cooling rate for simulated annealing.
-
-Considerations for Decrypting a Substitution Cipher
-
-When attempting to decrypt a substitution cipher, several key considerations must be made:
-
-	1.	Language Properties:
-	•	Every language has common letter patterns, both in terms of individual letter frequencies (e.g., ‘E’ is the most common letter in English) and letter combinations (like digraphs, trigrams, etc.).
-	•	Understanding these patterns helps guide the decryption process.
-	2.	Statistical Patterns:
-	•	Substitution ciphers are vulnerable to frequency analysis, where the frequencies of letters in the ciphertext are compared to known letter frequencies in the language.
-	•	This project takes frequency analysis further by also considering the frequency of n-grams.
-	3.	Heuristic Optimization:
-	•	Since trying all possible mappings is computationally infeasible (there are ￼ possible mappings), heuristic optimization methods like simulated annealing are used to find a good solution without trying every possibility.
-	4.	Hyperparameter Tuning:
-	•	The success of simulated annealing heavily depends on the choice of hyperparameters (e.g., initial temperature, cooling rate). Grid search is used to systematically explore different hyperparameter combinations and find the optimal configuration.
-
-
-
-Running the Code
-
-To run the program, simply call the break_cipher_with_grid_search function with the filename of the encrypted text as an argument:
-
-break_cipher_with_grid_search("encrypted_book.txt")
-
-Make sure that the encrypted text file (encrypted_book.txt) is in the same directory as the script.
-
-
-
-Conclusion
-
-This project provides a robust method for decrypting substitution ciphers by leveraging the power of n-gram analysis and simulated annealing. It explores various hyperparameter configurations through grid search to find the best decryption possible. The combination of statistical analysis and probabilistic optimization offers an effective approach to breaking classical ciphers.
-
----
+The expensive runtime is a direct consequence of repeatedly scoring long candidate texts across a broad parameter grid. Reducing the grid or iteration count can make experiments quicker, but may also change the quality of the best candidate. The archived scripts document earlier trade-offs and may be useful when exploring more efficient scoring or search strategies.
